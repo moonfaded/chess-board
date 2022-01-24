@@ -18,7 +18,7 @@
 class ChessBoard {
     var board:[Int:[String:ChessMan]] = [:]
     let rowRange = 1...8
-    let colRange = UInt32("A")...UInt32("H")
+    let colRange = "A"..."H"
     
     init(){
         for i in rowRange {
@@ -26,12 +26,15 @@ class ChessBoard {
         }
     }
     
-    subscript(number: Int) -> [String:ChessMan]? {
+    subscript(number: Int, word: String) -> ChessMan? {
         get {
-            return board[number]
+            return board[number]?[word]
         }
         set {
-            board[number] = newValue
+            guard rowRange.contains(number) else { return }
+            guard colRange.contains(word) else { return }
+            
+            board[number]?[word] = newValue
         }
     }
 }

@@ -19,10 +19,13 @@ class ChessMan {
         case king = "King"
     }
     
-    var color: Color
-    var type: FigureType
+    let color: Color
+    let type: FigureType
     var coordinates: (Character, UInt)?
     var symbol: Character
+    var colorAndType: String {
+        "Color = \(color), Type = \(type)"
+    }
     
     init(color: Color, type: FigureType) {
         self.color = color

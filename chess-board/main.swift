@@ -7,12 +7,10 @@
 
 import Foundation
 
-let whiteKing = ChessMan(color: .white, type: .king, coordinates: ("A",5), symbol: "♚")
+let whiteKing = ChessMan(color: .white, type: .king)
 let board = ChessBoard()
 
-board[8]! = ["A":whiteKing]
-
-
-for i in 1...8 {
-    print(i, board[i]!)
-}
+board[8, "A"] = whiteKing
+print(board[8, "A"]?.colorAndType ?? "No chessman here!")
+board[8, "A"] = nil
+print(board[8, "A"] ?? "No chessman here!")
