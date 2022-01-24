@@ -22,22 +22,37 @@ class ChessMan {
     let color: Color
     let type: FigureType
     var coordinates: (Character, UInt)?
-    var symbol: Character
+    var symbol: Character {
+        switch (self.color, self.type) {
+        case (.white, .pawn): return "♚"
+        case (.white, .bishop): return "♚"
+        case (.white, .knight): return "♚"
+        case (.white, .rook): return "♚"
+        case (.white, .queen): return "♚"
+        case (.white, .king): return "♚"
+            
+        case (.black, .pawn): return "♚"
+        case (.black, .bishop): return "♚"
+        case (.black, .knight): return "♚"
+        case (.black, .rook): return "♚"
+        case (.black, .queen): return "♚"
+        case (.black, .king): return "♚"
+        }
+    }
+    
     var colorAndType: String {
-        "Color = \(color), Type = \(type)"
+        "Color = \(color), Type = \(type), Symbol = \(symbol)"
     }
     
     init(color: Color, type: FigureType) {
         self.color = color
         self.type = type
         coordinates = nil
-        symbol = "*"
     }
     init(color: Color, type: FigureType, coordinates: (Character, UInt), symbol: Character) {
         self.color = color
         self.type = type
         self.coordinates = coordinates
-        self.symbol = symbol
     }
     
     func setCoordinates(coordinates: (Character, UInt)) {
