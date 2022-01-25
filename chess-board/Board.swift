@@ -16,25 +16,27 @@
 //   A B C D E F G H
 
 class ChessBoard {
-    var board:[Int:[String:ChessMan]] = [:]
-    let rowRange = 1...8
-    let colRange = "A"..."H"
+    var board:[UInt8:[Character:ChessMan]] = [:]
+    let rowRange = UInt8(1)...8
+    let colRange = Character("A")..."H"
+    var figures:[ChessMan] = []
     
-    init(){
+    init() {
         for i in rowRange {
             board[i] = [:]
         }
     }
     
-    subscript(number: Int, word: String) -> ChessMan? {
+    subscript(number: UInt8, letter: Character) -> ChessMan? {
         get {
-            return board[number]?[word]
+            return board[number]?[letter]
         }
         set {
             guard rowRange.contains(number) else { return }
-            guard colRange.contains(word) else { return }
+            guard colRange.contains(letter) else { return }
             
-            board[number]?[word] = newValue
+            newValue?.setCoordinates((number, letter))
+            board[number]?[letter] = newValue
         }
     }
 }

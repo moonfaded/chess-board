@@ -6,59 +6,97 @@
 //
 
 class ChessMan {
-    enum Color: String {
-        case black = "Black"
-        case white = "White"
+    let figure: Figure
+    var coordinates: (number: UInt8, letter: Character)?
+    
+    init(_ figure: Figure, coordinates: (UInt8, Character)) {
+        self.figure = figure
+        self.coordinates = coordinates
     }
-    enum FigureType: String {
-        case pawn = "Pawn"
-        case bishop = "Bishop"
-        case knight = "Kinght"
-        case rook = "Rook"
-        case queen = "Queen"
-        case king = "King"
+    init(_ figure: Figure) {
+        self.figure = figure
     }
     
-    let color: Color
-    let type: FigureType
-    var coordinates: (Character, UInt)?
-    var symbol: Character {
-        switch (self.color, self.type) {
-        case (.white, .pawn): return "♚"
-        case (.white, .bishop): return "♚"
-        case (.white, .knight): return "♚"
-        case (.white, .rook): return "♚"
-        case (.white, .queen): return "♚"
-        case (.white, .king): return "♚"
-            
-        case (.black, .pawn): return "♚"
-        case (.black, .bishop): return "♚"
-        case (.black, .knight): return "♚"
-        case (.black, .rook): return "♚"
-        case (.black, .queen): return "♚"
-        case (.black, .king): return "♚"
+    func printProperties() -> Void {
+        print("\nFigure \(figure.getProperties())")
+        if let xy = coordinates {
+            print("Coordinates: \(xy)")
+        } else {
+            print("Coordinates: nil")
         }
     }
     
-    var colorAndType: String {
-        "Color = \(color), Type = \(type), Symbol = \(symbol)"
-    }
-    
-    init(color: Color, type: FigureType) {
-        self.color = color
-        self.type = type
-        coordinates = nil
-    }
-    init(color: Color, type: FigureType, coordinates: (Character, UInt), symbol: Character) {
-        self.color = color
-        self.type = type
-        self.coordinates = coordinates
-    }
-    
-    func setCoordinates(coordinates: (Character, UInt)) {
+    func setCoordinates(_ coordinates: (UInt8, Character)) {
         self.coordinates = coordinates
     }
     func kill() {
         coordinates = nil
+    }
+}
+
+enum Figure {
+    case blackPawn, blackBishop, blackKnight, blackRook, blackQueen, blackKing,
+         whitePawn, whiteBishop, whiteKnight, whiteRook, whiteQueen, whiteKing
+    
+    func getProperties() -> String {
+        return "Color: \(color), Type: \(type), Symbol: \(symbol)"
+    }
+    
+    var color: Color {
+        switch self {
+        case .blackPawn: return .black
+        case .blackBishop: return .black
+        case .blackKnight: return .black
+        case .blackRook: return .black
+        case .blackQueen: return .black
+        case .blackKing: return .black
+        case .whitePawn: return .white
+        case .whiteBishop: return .white
+        case .whiteKnight: return .white
+        case .whiteRook: return .white
+        case .whiteQueen: return .white
+        case .whiteKing: return .white
+        }
+    }
+    
+    var type: FigureType {
+        switch self {
+        case .blackPawn: return .pawn
+        case .blackBishop: return .bishop
+        case .blackKnight: return .knight
+        case .blackRook: return .rook
+        case .blackQueen: return .queen
+        case .blackKing: return .king
+        case .whitePawn: return .pawn
+        case .whiteBishop: return .bishop
+        case .whiteKnight: return .knight
+        case .whiteRook: return .rook
+        case .whiteQueen: return .queen
+        case .whiteKing: return .king
+        }
+    }
+    
+    var symbol: Character {
+        switch self {
+        case .blackPawn: return "♟︎"
+        case .blackBishop: return "♝"
+        case .blackKnight: return "♞"
+        case .blackRook: return "♜"
+        case .blackQueen: return "♛"
+        case .blackKing: return "♚"
+        case .whitePawn: return "♙"
+        case .whiteBishop: return "♗"
+        case .whiteKnight: return "♘"
+        case .whiteRook: return "♖"
+        case .whiteQueen: return "♕"
+        case .whiteKing: return "♔"
+        }
+    }
+
+    enum Color: String {
+        case black, white
+    }
+    enum FigureType: String {
+        case pawn, bishop, knight, rook, queen, king
     }
 }

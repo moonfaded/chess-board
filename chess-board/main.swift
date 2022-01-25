@@ -5,12 +5,15 @@
 //  Created by Александр Владыко on 24.01.22.
 //
 
-import Foundation
+//let whiteKing = ChessMan(.whiteKing)
 
-let whiteKing = ChessMan(color: .white, type: .king)
+//whiteKing.printProperties()
+//whiteKing.setCoordinates(("A", 5))
+//whiteKing.printProperties()
+//whiteKing.kill()
+//whiteKing.printProperties()
+
 let board = ChessBoard()
 
-board[8, "A"] = whiteKing
-print(board[8, "A"]?.colorAndType ?? "No chessman here!")
-board[8, "A"] = nil
-print(board[8, "A"] ?? "No chessman here!")
+board[7, "E"] = ChessMan(.whiteKing)
+print(board[7, "E"]!.printProperties())
