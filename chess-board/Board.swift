@@ -19,7 +19,6 @@ class ChessBoard {
     var board:[UInt8:[Character:ChessMan]] = [:]
     let rowRange = UInt8(1)...8
     let colRange = Character("A")..."H"
-    var figures:[ChessMan] = []
     
     init() {
         for i in rowRange {
@@ -29,14 +28,23 @@ class ChessBoard {
     
     subscript(number: UInt8, letter: Character) -> ChessMan? {
         get {
-            return board[number]?[letter]
+            guard rowRange.contains(number) else {
+                print("Number index of board out of bound!")
+                return nil
+            }
+            guard colRange.contains(letter) else {
+                print("Letter index of board out of bounds!")
+                return nil
+            }
+            return board[number]![letter]
         }
         set {
             guard rowRange.contains(number) else { return }
             guard colRange.contains(letter) else { return }
+            guard let chessMan = newValue else { return }
             
-            newValue?.setCoordinates((number, letter))
-            board[number]?[letter] = newValue
+            chessMan.setCoordinates((number, letter))
+            board[number]![letter] = chessMan
         }
     }
 }

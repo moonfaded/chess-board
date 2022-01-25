@@ -16,4 +16,9 @@
 let board = ChessBoard()
 
 board[7, "E"] = ChessMan(.whiteKing)
-print(board[7, "E"]!.printProperties())
+
+if let figureFromBoard = board[7, "E"] {
+    figureFromBoard.printProperties()
+} else {
+    print("Figure not found!")
+}
