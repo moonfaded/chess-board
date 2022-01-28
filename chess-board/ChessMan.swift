@@ -25,12 +25,15 @@ class ChessMan {
             print("Coordinates: nil")
         }
     }
-    
     func setCoordinates(_ coordinates: (UInt8, Character)) {
         self.coordinates = coordinates
     }
     func kill() {
         coordinates = nil
+    }
+    func capture() {
+        guard let figureCoordinates = self.coordinates else { return }
+        board[figureCoordinates.number, figureCoordinates.letter] = nil
     }
 }
 

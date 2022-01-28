@@ -36,15 +36,22 @@ class ChessBoard {
                 print("Letter index of board out of bounds!")
                 return nil
             }
-            return board[number]![letter]
+            if let row = board[number] {
+                return row[letter]
+            } else {
+                return nil
+            }
         }
         set {
             guard rowRange.contains(number) else { return }
             guard colRange.contains(letter) else { return }
-            guard let chessMan = newValue else { return }
             
-            chessMan.setCoordinates((number, letter))
-            board[number]![letter] = chessMan
+            if let chessMan = newValue {
+                chessMan.setCoordinates((number, letter))
+                board[number]![letter] = chessMan
+            } else {
+                board[number]![letter]?.kill()
+            }
         }
     }
 }
